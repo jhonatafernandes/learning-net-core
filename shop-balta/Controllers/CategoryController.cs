@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace shop_balta.Controllers
 {
-    //https://localhost:44342
+   
     
     [Route("categories")]
     public class CategoryController : ControllerBase
