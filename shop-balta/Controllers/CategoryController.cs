@@ -18,7 +18,7 @@ namespace shop_balta.Controllers
         {
             try
             {
-                var categories = await context.Categories.AsNoTracking().ToListAsync();
+                var categories = await context.User.AsNoTracking().ToListAsync();
                 return Ok(categories);
 
             }
@@ -37,7 +37,7 @@ namespace shop_balta.Controllers
         {
             try
             {
-                var category = await context.Categories.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+                var category = await context.User.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
                 if (category == null)
                     return NotFound(new { message = "Categoria não encontrada" });
 
@@ -64,7 +64,7 @@ namespace shop_balta.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                context.Categories.Add(model);
+                context.User.Add(model);
                 await context.SaveChangesAsync();
                 return Ok(model);
 
@@ -98,7 +98,7 @@ namespace shop_balta.Controllers
             try
             {
                 context.Entry<Category>(model).State = EntityState.Modified;
-                context.SaveChangesAsync();
+                await context.SaveChangesAsync();
                 return Ok(model);
 
             }
@@ -122,14 +122,14 @@ namespace shop_balta.Controllers
             [FromServices] DataContext context
             )
         {
-            var category = await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            var category = await context.User.FirstOrDefaultAsync(x => x.Id == id);
             if (category == null)
                 return NotFound(new { message = "Categoria não encontrada" });
 
             try
             {
-                context.Categories.Remove(category);
-                context.SaveChangesAsync();
+                context.User.Remove(category);
+                await context.SaveChangesAsync();
 
                 return Ok(new { message = "Categoria deletada com sucesso!" });
             }

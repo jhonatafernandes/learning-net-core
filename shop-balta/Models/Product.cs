@@ -25,6 +25,8 @@ namespace shop_balta.Models
 
         [Required(ErrorMessage = "Este campo é obrigatório")]
         [Range(1, int.MaxValue, ErrorMessage = "O campo deve ser maior ou igual a 1")]
+        public int CategoryId { get; set; }
+
         public Category Category { get; set; }
 
     }
